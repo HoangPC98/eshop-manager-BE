@@ -1,0 +1,53 @@
+version: "3.7"
+services:
+  postgres:
+    container_name: postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    env_file:
+      - docker.env
+    networks:
+      - pcshop
+
+  # pgadmin:
+  #   links:
+  #   - postgres:postgres
+  #   container_name: pgadmin
+  #   image: dpage/pgadmin4
+  #   ports:
+  #   - "8080:80"
+  #   volumes:
+  #   - /data/pgadmin:/root/.pgadmin
+  #   env_file:
+  #   - docker.env
+  #   networks:
+  #   - postgres
+    
+  # api-server:
+  #   container_name: shop-api
+  #   image: shop-api
+  #   ports:
+  #     - '8000:8000'
+  #   environment:
+  #     LOG_LEVEL: debug
+  #     DATABASE_HOST: postgres
+  #   build:
+  #     context: ..
+  #     dockerfile: Dockerfile
+  #   networks:
+  #     - pcshop
+  #   depends_on:
+  #     - postgres
+  #   restart: always
+   
+  # redis:
+  #   container_name: redis
+  #   hostname: redis
+  #   image: redis
+  #   ports: 
+  #     - '127.0.0.1:6379:6379'
+
+networks:
+  pcshop:
+    driver: bridge
